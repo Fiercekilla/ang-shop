@@ -1,3 +1,91 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active" routerLink=".."><a href="#">Link<span class="sr-only">(current)</span></a></li>
+        <li><a>Link</a></li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" (click)="toggleAddPanel()" [class.active]="addPanel">Добавить</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <h1>
   {{title}}
 </h1>
+
+<div class="container">
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="jumbotron" *ngIf="addPanel">
+    <h3>Добавить Процессор</h3>
+    <div class="col-md-5">
+    <label >Имя</label>
+    <div class="form-group">
+      <input type="text" name="productName" ngModel #productName class="form-control" aria-label="Amount (to the nearest dollar)">
+    </div>
+
+    <label >Имя производителя</label>
+    <div class="form-group">
+      <input type="text" name="companyName" ngModel #companyName class="form-control" aria-label="Amount (to the nearest dollar)">
+    </div>
+
+      <label >Описание</label>
+      <div class="form-group">
+        <textarea name="description" ngModel #description class="form-control" aria-label="Amount (to the nearest dollar)">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Категория</label>
+        <select class="form-control" id="category" #category (change)="setCategory(category.value)">
+          <option>Процессор</option>
+          <option>Видеокарта</option>
+          <option>Блок питания</option>
+          <option>Материнская плата</option>
+        </select>
+      </div>
+
+        <label >Изображение</label>
+        <div class="form-group">
+          <input type="text" name="imageUrl" ngModel #imageUrl class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+
+
+        <label >Цена</label>
+    <div class="input-group">
+      <span class="input-group-addon">Руб.</span>
+      <input type="text" name="price" ngModel #price class="form-control" aria-label="Amount (to the nearest dollar)">
+    </div>
+
+    <label>Сокет</label>
+    <div class="form-group">
+      <input type="text" name="socket" ngModel #socket class="form-control" aria-label="Amount (to the nearest dollar)">
+    </div>
+
+      <button type="submit" class="btn btn-default btn-primary">Добавить</button>
+  </div>
+  </form>
+
+  <router-outlet class="col-md-8"></router-outlet>
+  <div class="col-md-4 config">
+    <div class="jumbotron" *ngFor="let item of rest.config; let i = index;">
+      {{ item .companyName }}
+      <button class="glyphicon glyphicon-remove pull-right" (click)="removeItemFromConfig(i)"></button>
+    </div>
+  </div>
+
+</div>
+
+

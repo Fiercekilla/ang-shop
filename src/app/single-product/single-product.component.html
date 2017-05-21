@@ -1,0 +1,14 @@
+<div class="col-md-10 jumbotron single-product" (click)="openProduct(item.id, $event)">
+  <div class="form-group">
+    <div class="media-left">
+      <a href="#">
+        <img class="media-object" src="http://placehold.it/150x70">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{ item.productName}}</h4>
+      {{ item.description }}
+    </div>
+  </div>
+    <button class="btn btn-success" (click)="rest.addItemToConfig(item)">Добавить в конфигурацию</button>
+</div>
