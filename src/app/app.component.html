@@ -2,13 +2,13 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" routerLink="..">Brand</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active" routerLink=".."><a href="#">Link<span class="sr-only">(current)</span></a></li>
-        <li><a>Link</a></li>
+        <li><a>Конфигуратор</a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -22,15 +22,17 @@
     </div>
   </div>
 </nav>
-<h1>
-  {{title}}
-</h1>
 
 <div class="container">
 
+  <div *ngIf="rest.errorMessage" class="alert alert-danger">
+    <a (click)="rest.errorMessage = null" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Ошибка!</strong> {{ rest.errorMessage }}
+  </div>
+
   <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="jumbotron" *ngIf="addPanel">
     <h3>Добавить Процессор</h3>
-    <div class="col-md-5">
+    <div>
     <label >Имя</label>
     <div class="form-group">
       <input type="text" name="productName" ngModel #productName class="form-control" aria-label="Amount (to the nearest dollar)">
@@ -50,11 +52,25 @@
       <div class="form-group">
         <label for="category">Категория</label>
         <select class="form-control" id="category" #category (change)="setCategory(category.value)">
+          <option></option>
           <option>Процессор</option>
           <option>Видеокарта</option>
           <option>Блок питания</option>
           <option>Материнская плата</option>
+          <option>Корпус</option>
+          <option>Оперативная память</option>
+          <option>Жесткий диск</option>
         </select>
+      </div>
+
+      <label >Мощность</label>
+      <div class="form-group">
+        <input type="text" name="power" ngModel #power class="form-control" aria-label="Amount (to the nearest dollar)">
+      </div>
+
+      <label >Размер</label>
+      <div class="form-group">
+        <input type="text" name="size" ngModel #size class="form-control" aria-label="Amount (to the nearest dollar)">
       </div>
 
         <label >Изображение</label>
@@ -78,10 +94,10 @@
   </div>
   </form>
 
-  <router-outlet class="col-md-8"></router-outlet>
+  <router-outlet></router-outlet>
   <div class="col-md-4 config">
     <div class="jumbotron" *ngFor="let item of rest.config; let i = index;">
-      {{ item .companyName }}
+      {{item.category}} : {{ item.productName }}
       <button class="glyphicon glyphicon-remove pull-right" (click)="removeItemFromConfig(i)"></button>
     </div>
   </div>

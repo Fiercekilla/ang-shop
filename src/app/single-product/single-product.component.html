@@ -1,8 +1,8 @@
-<div class="col-md-10 jumbotron single-product" (click)="openProduct(item.id, $event)">
+<div *ngIf="item.category === category" class="col-md-10 jumbotron single-product" (click)="openProduct(item.id, $event)">
   <div class="form-group">
     <div class="media-left">
       <a href="#">
-        <img class="media-object" src="http://placehold.it/150x70">
+        <img class="media-object" src="{{ item.imageUrl}}">
       </a>
     </div>
     <div class="media-body">
@@ -11,4 +11,5 @@
     </div>
   </div>
     <button class="btn btn-success" (click)="rest.addItemToConfig(item)">Добавить в конфигурацию</button>
+    <button class="btn btn-danger" (click)="rest.addItemToConfig(item)">Удалить</button>
 </div>

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {RestService} from "../rest/rest.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-single-product',
@@ -8,7 +9,8 @@ import {RestService} from "../rest/rest.service";
 })
 export class SingleProductComponent implements OnInit {
 
-  @Input('item') item: any;
+  @Input('item') item: any
+  @Input('category') category: any;
 
   constructor(private router: Router,
               public rest: RestService) { }

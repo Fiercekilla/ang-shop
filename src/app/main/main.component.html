@@ -1,3 +1,8 @@
-<div class="col-md-8">
-  <app-single-product *ngFor="let item of rest.cores"  [item]="item"></app-single-product>
-</div>
+<md-tab-group class="col-md-12">
+  <md-tab *ngFor="let category of categories">
+    <ng-template md-tab-label>
+      {{ category }}
+    </ng-template>
+    <app-single-product *ngFor="let item of rest.cores"  [item]="item" [category]="category"></app-single-product>
+  </md-tab>
+</md-tab-group>
