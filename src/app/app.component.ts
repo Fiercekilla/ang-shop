@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
   public addPanel:boolean = false;
   public productItem: any = {};
 
-  constructor(private rest: RestService){}
+  constructor(public rest: RestService){}
 
   ngOnInit() {
 
