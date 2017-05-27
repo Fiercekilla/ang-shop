@@ -8,7 +8,8 @@ import {RestService} from "../rest/rest.service";
 })
 export class MainComponent implements OnInit {
 
-  public categories = ['Процессор','Материнская плата','Видеокарта','Корпус','Оперативная память','Куллер','Блок питания'];
+  public categories = ['Процессор','Материнская плата', 'Видеокарта','Охлаждение', 'Оперативная память','Жесткий диск', 'Блок питания', 'Корпус' ];
+  public configuratedItems: any;
 
   constructor(private rest: RestService,
               private router: Router) { }
