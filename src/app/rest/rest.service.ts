@@ -12,7 +12,7 @@ export class RestService {
   public config: any = [];
   public errorMessage:string = '';
 
-  private ip = '176.193.157.114';
+  private ip = '77.51.128.5';
 
   constructor(private http: Http) { }
 
