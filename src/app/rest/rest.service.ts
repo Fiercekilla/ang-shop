@@ -12,7 +12,7 @@ export class RestService {
   public config: any = [];
   public errorMessage:string = '';
 
-  private ip = '77.51.128.5';
+  private ip = 'localhost';
 
   constructor(private http: Http) { }
 
@@ -21,14 +21,14 @@ export class RestService {
     let options = new RequestOptions({ headers: headers });
     body.id = + new Date();
     console.info(body);
-    return this.http.post('http://' + this.ip + ':3000/api/add/core',body, options)
+    return this.http.post('http://' + this.ip + ':9595/api/add/core',body, options)
       .subscribe((res) => {
         console.log(res);
       });
   }
 
  public getCores() : Observable<any> {
-   return this.http.get('http://' + this.ip + ':3000/api/cores')
+   return this.http.get('http://' + this.ip + ':9595/api/cores')
      .map((res) => {
        let body = res['_body'];
        this.cores = JSON.parse(body);
@@ -65,7 +65,7 @@ export class RestService {
  }
 
   public getProductById(id): Observable<any> {
-    return this.http.get('http://' + this.ip + ':3000/api/product/' + id)
+    return this.http.get('http://' + this.ip + ':9595/api/product/' + id)
       .map((res) => {
         let body = res['_body'];
         this.item = JSON.parse(body);
@@ -79,6 +79,29 @@ export class RestService {
       if (!isUniq(el)) uniq = false;
     });
     uniq || this.config.length === 0 ? this.config.push(item) : this.errorMessage = 'Вы уже добавили товар категории ' + item.category;
+
+    const itemCheker = (el,category) => el.category === category;
+    let filteredItems: any = [];
+    console.log(this.config);
+
+    if (itemCheker(item, 'Процессор')) {
+      this.itemsObject.motherBoards.forEach(function (el) {
+        if (el['socket'].toLowerCase() === item.socket.toLowerCase()) filteredItems.push(el);
+      });
+      this.itemsObject.motherBoards = filteredItems;
+      console.log(this.itemsObject.motherBoards);
+    }
+    if (itemCheker(item, 'Блок питания')) {
+      filteredItems = [];
+      let self = this;
+      this.itemsObject.cases.forEach(function (el) {
+          if (self.config[1]['size'] === el.size) filteredItems.push(el);
+      });
+      this.itemsObject.cases = filteredItems;
+      console.log(this.itemsObject.cases);
+    }
+
+
 
     event.preventDefault();
   }

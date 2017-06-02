@@ -1,8 +1,8 @@
 <md-tab-group class="col-md-8" [selectedIndex]="rest.config.length">
   <md-tab *ngFor="let category of categories; let i = index" [disabled]="true">
     <ng-template md-tab-label>
-      {{ i + 1 }}. {{ category }}
+      {{ i + 1 }}. {{ category.name }}
     </ng-template>
-    <app-single-product *ngFor="let item of rest.cores"  [item]="item" [category]="category"></app-single-product>
+    <app-single-product *ngFor="let item of rest.itemsObject[category.id]"  [item]="item"></app-single-product>
   </md-tab>
 </md-tab-group>
