@@ -1,4 +1,5 @@
-<md-tab-group class="col-md-8" [selectedIndex]="rest.config.length">
+<div class="tooltip">{{ activeTooltip }}</div>
+<md-tab-group class="col-md-8" [selectedIndex]="rest.config.length" (selectChange)="changeCategory($event)">
   <md-tab *ngFor="let category of categories; let i = index" [disabled]="true">
     <ng-template md-tab-label>
       {{ i + 1 }}. {{ category.name }}

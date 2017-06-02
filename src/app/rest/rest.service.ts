@@ -40,8 +40,7 @@ export class RestService {
             ram = [],
             hdd = [],
             bp = [],
-            cases = []
-       ;
+            cases = [];
        this.cores.forEach(function (item) {
          if (itemCheker(item, 'Материнская плата')) mb.push(item);
          if (itemCheker(item, 'Процессор')) cores.push(item);
