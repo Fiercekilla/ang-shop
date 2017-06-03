@@ -1,0 +1,12 @@
+<div class="container login">
+  <div class="jumbotron">
+    <h3>Здравствуйте, войдите на сайт</h3>
+    <div class="input-group">
+      <span class="field">Логин: </span><input [(ngModel)]="login" type="text" class="form-control">
+    </div>
+    <div class="input-group">
+      <span class="field">Пароль: </span><input [(ngModel)]="pass" type="password" class="form-control">
+    </div>
+    <p><a class="btn btn-primary btn-lg" role="button" (click)="authService.login(login,pass)">Войти</a></p>
+  </div>
+</div>

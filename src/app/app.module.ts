@@ -11,13 +11,17 @@ import { MainComponent } from './main/main.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { ProductComponent } from './product/product.component';
 import { SingleProductComponent } from './single-product/single-product.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from "./auth.guard";
+import { AuthService } from "./auth.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     ProductComponent,
-    SingleProductComponent
+    SingleProductComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,9 @@ import { SingleProductComponent } from './single-product/single-product.componen
   ],
   providers: [
     RestService,
-    MdTabNavBar
+    MdTabNavBar,
+    AuthGuard,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

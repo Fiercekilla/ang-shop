@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from "./rest/rest.service";
 import {NgForm} from '@angular/forms';
+import { AuthService } from "./auth.service";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit{
   public addPanel:boolean = false;
   public productItem: any = {};
 
-  constructor(public rest: RestService){}
+  constructor(public rest: RestService,
+              public authService: AuthService){}
 
   ngOnInit() {
 

@@ -12,7 +12,7 @@ export class RestService {
   public config: any = [];
   public errorMessage:string = '';
 
-  private ip = 'localhost';
+  private ip = 'localhost:3000';
 
   constructor(private http: Http) { }
 
@@ -21,14 +21,14 @@ export class RestService {
     let options = new RequestOptions({ headers: headers });
     body.id = + new Date();
     console.info(body);
-    return this.http.post('http://' + this.ip + ':9595/api/add/core',body, options)
+    return this.http.post('http://' + this.ip + '/api/add/core',body, options)
       .subscribe((res) => {
         console.log(res);
       });
   }
 
  public getCores() : Observable<any> {
-   return this.http.get('http://' + this.ip + ':9595/api/cores')
+   return this.http.get('http://' + this.ip + '/api/cores')
      .map((res) => {
        let body = res['_body'];
        this.cores = JSON.parse(body);
@@ -64,7 +64,7 @@ export class RestService {
  }
 
   public getProductById(id): Observable<any> {
-    return this.http.get('http://' + this.ip + ':9595/api/product/' + id)
+    return this.http.get('http://' + this.ip + '/api/product/' + id)
       .map((res) => {
         let body = res['_body'];
         this.item = JSON.parse(body);

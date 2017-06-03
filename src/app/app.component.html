@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" *ngIf="authService.isLogged">
   <div class="container-fluid">
 
     <div class="navbar-header">
@@ -97,7 +97,7 @@
   </form>
 
   <router-outlet></router-outlet>
-  <div class="col-md-4 config">
+  <div class="col-md-4 config" *ngIf="authService.isLogged">
     <h3>Ваша конфигурация: </h3>
     <div class="jumbotron" *ngFor="let item of rest.config; let i = index;">
       {{item.category}} : {{ item.productName }}
