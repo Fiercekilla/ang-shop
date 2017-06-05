@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {RestService} from "../rest/rest.service";
+import { PagerService } from "../pager.service";
 
 @Component({
   selector: 'app-main',
@@ -23,19 +24,36 @@ export class MainComponent implements OnInit {
   ];
   public configuratedItems: any;
   public activeTooltip: string;
+  public pager: any = {};
+  public pagedItems: any = [];
+
+  private activeCategory: string;
 
   constructor(private rest: RestService,
-              private router: Router) { }
+              private router: Router,
+              private pagerService: PagerService) { }
 
   ngOnInit() {
-    this.rest.getCores().subscribe();
+    this.activeCategory = 'cores';
+    this.rest.getCores().subscribe(() => {this.setPage(this.activeCategory,1);});
     this.activeTooltip = this.categories[0]['tooltip'];
+
+
+  }
+
+  public setPage(category: string, page: number) {
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+    this.pager = this.pagerService.getPager(this.rest.itemsObject[category].length,page);
+    console.log(this.pager);
+    this.pagedItems[category] = this.rest.itemsObject[category].slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
   public changeCategory(event:any) {
-    console.log(event);
     this.activeTooltip = this.categories[event.index]['tooltip'];
-    console.info(this.activeTooltip);
+    this.activeCategory = this.categories[event.index].id;
+    this.setPage(this.activeCategory,1);
   }
 
 }

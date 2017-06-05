@@ -14,6 +14,7 @@ import { SingleProductComponent } from './single-product/single-product.componen
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
+import { PagerService } from "app/pager.service";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthService } from "./auth.service";
     RestService,
     MdTabNavBar,
     AuthGuard,
-    AuthService
+    AuthService,
+    PagerService
   ],
   bootstrap: [AppComponent]
 })
