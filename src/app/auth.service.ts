@@ -26,12 +26,12 @@ export class AuthService {
 
   login(login:string, password:string) {
     const authCheker = (login,password, inputLogin, inputPassword) => {
-
       if (login === inputLogin && password === inputPassword) {
         this.isLogged = true;
         this.router.navigate(['/']);
+        this.loginErrorMessage = null;
       } else {
-        this.loginErrorMessage = 'Неверный логин или пароль!';
+        if (!this.isLogged) this.loginErrorMessage = 'Неверный логин или пароль!';
       }
     };
     this.users.forEach(function (item) {

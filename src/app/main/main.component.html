@@ -4,11 +4,11 @@
     <ng-template md-tab-label>
       {{ i + 1 }}. {{ category.name }}
     </ng-template>
-    <app-single-product *ngFor="let item of pagedItems[category.id]"  [item]="item"></app-single-product>
     <ul class="col-md-12 pagination">
       <li><a *ngIf="pager.currentPage !== 1" (click)="setPage(category.id, 1)">&laquo;</a></li>
       <li [class.active]="pager.currentPage === page" *ngFor="let page of pager.pages" (click)="setPage(category.id,page)"><a>{{ page }}</a></li>
       <li><a *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(category.id, pager.totalPages)">&raquo;</a></li>
     </ul>
+    <app-single-product *ngFor="let item of pagedItems[category.id]"  [item]="item"></app-single-product>
   </md-tab>
 </md-tab-group>
