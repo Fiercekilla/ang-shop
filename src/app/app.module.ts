@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 import { PagerService } from "app/pager.service";
+import { DesktopComponent } from './desktop/desktop.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PagerService } from "app/pager.service";
     MainComponent,
     ProductComponent,
     SingleProductComponent,
-    LoginComponent
+    LoginComponent,
+    DesktopComponent
   ],
   imports: [
     BrowserModule,

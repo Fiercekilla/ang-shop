@@ -4,10 +4,12 @@ import {MainComponent} from "app/main/main.component";
 import {ProductComponent} from "app/product/product.component";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./auth.guard";
+import { DesktopComponent } from "./desktop/desktop.component";
 
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent, canActivate: [AuthGuard] },
+  { path: 'desktop', component: DesktopComponent, canActivate: [AuthGuard] },
   { path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 

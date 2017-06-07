@@ -1,4 +1,12 @@
-<div class="col-md-8 product" *ngIf="rest.item[0]">
+<div *ngIf="categoryView" class="col-md-12">
+  <ul class="col-md-12 pagination">
+    <li><a *ngIf="pager.currentPage !== 1" (click)="setPage( 1)">&laquo;</a></li>
+    <li [class.active]="pager.currentPage === page" *ngFor="let page of pager.pages" (click)="setPage(page)"><a>{{ page }}</a></li>
+    <li><a *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(pager.totalPages)">&raquo;</a></li>
+  </ul>
+  <app-single-product *ngFor="let item of pagedItems"  [item]="item"></app-single-product>
+</div>
+<div class="col-md-8 product" *ngIf="rest.item[0] && !categoryView">
 
   {{ rest.item[0].productName |  json  }}
 </div>

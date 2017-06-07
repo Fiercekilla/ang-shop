@@ -51,7 +51,6 @@ export class MainComponent implements OnInit {
       return;
     }
     this.pager = this.pagerService.getPager(this.rest.itemsObject[category].length,page);
-    console.log(this.pager);
     this.pagedItems[category] = this.rest.itemsObject[category].slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
