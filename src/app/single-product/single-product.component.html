@@ -1,5 +1,5 @@
 <div  class="col-md-10 jumbotron single-product" [class.mini]="mini" (click)="openProduct(item.id, $event)">
-  <div class="form-group" [class.col-md-8]="mini">
+  <div class="form-group" [class.col-md-7]="mini">
     <div class="media-left">
       <a href="#">
         <img class="media-object" src="{{ item.imageUrl}}">
@@ -11,8 +11,9 @@
       <h3 class="media-heading price">{{ item.price }} руб.</h3>
     </div>
   </div>
-  <div *ngIf="mini" class="add-to-cart col-md-4">
-    <button class="btn btn-success" >Добавить в Корзину</button>
+  <div *ngIf="mini" class="add-to-cart col-md-5">
+    <input type="text" placeholder="Количество" #count>
+    <button class="btn btn-success" (click)="rest.addItemToCart(item, count)">Добавить в Корзину</button>
   </div>
     <button *ngIf="!mini" class="btn btn-success" (click)="rest.addItemToConfig(item)">Добавить в конфигурацию</button>
     <button *ngIf="!mini" class="btn btn-danger" >Удалить</button>

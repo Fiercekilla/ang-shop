@@ -1,0 +1,11 @@
+<div class="mini-cart">
+  <ul>
+    <li *ngFor="let category of rest.cartKeys">
+      <div class="cart-product-heading">{{category}}</div>
+      <ul>
+        <li class="cart-product-item" *ngFor="let item of rest.cart[category]"><span>{{ item.productName }}</span> <span>{{ item.count }}</span> <span>{{ item.price }}</span></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="total"><span>ИТОГО:</span><span>{{ rest.totalSum }}</span></div>
+</div>

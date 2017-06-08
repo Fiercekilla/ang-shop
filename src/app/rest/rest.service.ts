@@ -11,6 +11,9 @@ export class RestService {
   public item: any = [];
   public config: any = [];
   public errorMessage:string = '';
+  public cart:any = {};
+  public totalSum: number = 0;
+  public cartKeys: any;
 
   private ip = 'localhost:9595';
 
@@ -20,10 +23,8 @@ export class RestService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     body.id = + new Date();
-    console.info(body);
     return this.http.post('http://' + this.ip + '/api/add/core',body, options)
       .subscribe((res) => {
-        console.log(res);
       });
   }
 
@@ -62,7 +63,7 @@ export class RestService {
           this.itemsObject.hdd = hdd;
           this.itemsObject.bp = bp;
           this.itemsObject.cases = cases;
-          console.info(this.itemsObject);
+          return res;
         });
     }
  }
@@ -85,14 +86,12 @@ export class RestService {
 
     const itemCheker = (el,category) => el.category === category;
     let filteredItems: any = [];
-    console.log(this.config);
 
     if (itemCheker(item, 'Процессор')) {
       this.itemsObject.motherBoards.forEach(function (el) {
         if (el['socket'].toLowerCase() === item.socket.toLowerCase()) filteredItems.push(el);
       });
       this.itemsObject.motherBoards = filteredItems;
-      console.log(this.itemsObject.motherBoards);
     }
     if (itemCheker(item, 'Блок питания')) {
       filteredItems = [];
@@ -101,11 +100,19 @@ export class RestService {
           if (self.config[1]['size'] === el.size) filteredItems.push(el);
       });
       this.itemsObject.cases = filteredItems;
-      console.log(this.itemsObject.cases);
     }
 
-
-
     event.preventDefault();
+  }
+
+  addItemToCart(item:any, count: any){
+
+      let product = Object.assign({},item);
+      count.value ? product.count = +count.value : product.count = 1;
+      if (!Array.isArray(this.cart[product.category])) this.cart[product.category] = [];
+      product.price = +product.price * +count.value;
+      this.cart[product.category].push(product);
+      this.cartKeys = Object.keys(this.cart);
+      this.totalSum += product.price;
   }
 }

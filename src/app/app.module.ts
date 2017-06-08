@@ -16,6 +16,7 @@ import { AuthGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 import { PagerService } from "app/pager.service";
 import { DesktopComponent } from './desktop/desktop.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DesktopComponent } from './desktop/desktop.component';
     ProductComponent,
     SingleProductComponent,
     LoginComponent,
-    DesktopComponent
+    DesktopComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
 
   public addPanel:boolean = false;
   public productItem: any = {};
+  public showCart: boolean = false;
 
   constructor(public rest: RestService,
               public authService: AuthService){}

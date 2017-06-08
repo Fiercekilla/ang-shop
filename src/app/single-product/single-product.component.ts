@@ -20,7 +20,7 @@ export class SingleProductComponent implements OnInit {
   }
 
   openProduct(id, event) {
-    if (event.target.classList[0] !== 'btn') {
+    if (event.target.classList[0] !== 'btn' && event.target.tagName !== 'INPUT') {
       this.router.navigate(['/product/' + id]);
     }
   }

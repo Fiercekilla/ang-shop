@@ -16,12 +16,13 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" [class.active]="addPanel">Корзина</a></li>
+        <li><a href="#" [class.active]="addPanel" (click)="showCart = !showCart">Корзина</a></li>
         <li><a href="#" (click)="toggleAddPanel()" [class.active]="addPanel">Добавить</a></li>
         <li><a href="#" (click)="this.authService.logout()" [class.active]="addPanel">Выйти</a></li>
       </ul>
     </div>
   </div>
+  <app-cart *ngIf="showCart"></app-cart>
 </nav>
 
 <div class="container-fluid">
