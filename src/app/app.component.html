@@ -7,8 +7,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active" routerLink=".."><a href="#">Link<span class="sr-only">(current)</span></a></li>
-        <li><a>Конфигуратор</a></li>
+        <li><a routerLinkActive="active" routerLink="/config">Конфигуратор</a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -17,6 +16,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" [class.active]="addPanel">Корзина</a></li>
         <li><a href="#" (click)="toggleAddPanel()" [class.active]="addPanel">Добавить</a></li>
         <li><a href="#" (click)="this.authService.logout()" [class.active]="addPanel">Выйти</a></li>
       </ul>

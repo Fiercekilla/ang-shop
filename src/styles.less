@@ -34,6 +34,13 @@ ul {
   .cat-tooltip {
     font-size: 1.4em;
   }
+
+  &.mini {
+    padding: 10px;
+    img {
+      display: none;
+    }
+  }
 }
 
 
@@ -60,5 +67,35 @@ ul {
   li {
     cursor: pointer;
     border-bottom: none;
+  }
+}
+
+.category-block {
+  background-color: aliceblue;
+  margin: 10px;
+  width: 48%;
+  .pagination {
+    .active > a {
+      background-color: cornflowerblue;
+    }
+    li a {
+      background-color: transparent;
+      border: none;
+    }
+  }
+  .category-title {
+    font-size: 1.5em;
+    padding: 15px;
+    text-align: left;
+  }
+  .single-product {
+    background: transparent;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    &:last-child {
+      margin-bottom: 10px;
+    }
   }
 }

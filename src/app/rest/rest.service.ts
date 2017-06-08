@@ -28,12 +28,15 @@ export class RestService {
   }
 
  public getCores() : Observable<any> {
-   return this.http.get('http://' + this.ip + '/api/cores')
-     .map((res) => {
-       let body = res['_body'];
-       this.cores = JSON.parse(body);
-       const itemCheker = (item,category) => item.category === category;
-       let mb = [],
+    if (this.cores.length > 0) {
+      return Observable.of(this.cores)
+    } else {
+      return this.http.get('http://' + this.ip + '/api/cores')
+        .map((res) => {
+          let body = res['_body'];
+          this.cores = JSON.parse(body);
+          const itemCheker = (item,category) => item.category === category;
+          let mb = [],
             cores =[],
             gc = [],
             cold = [],
@@ -41,26 +44,27 @@ export class RestService {
             hdd = [],
             bp = [],
             cases = [];
-       this.cores.forEach(function (item) {
-         if (itemCheker(item, 'Материнская плата')) mb.push(item);
-         if (itemCheker(item, 'Процессор')) cores.push(item);
-         if (itemCheker(item, 'Охлаждение')) cold.push(item);
-         if (itemCheker(item, 'Видеокарта')) gc.push(item);
-         if (itemCheker(item, 'Оперативная память')) ram.push(item);
-         if (itemCheker(item, 'Жесткий диск')) hdd.push(item);
-         if (itemCheker(item, 'Блок питания')) bp.push(item);
-         if (itemCheker(item, 'Корпус')) cases.push(item);
-       });
-       this.itemsObject.motherBoards = mb;
-       this.itemsObject.cores = cores;
-       this.itemsObject.cold = cold;
-       this.itemsObject.graphicCards = gc;
-       this.itemsObject.ram = ram;
-       this.itemsObject.hdd = hdd;
-       this.itemsObject.bp = bp;
-       this.itemsObject.cases = cases;
-       console.info(this.itemsObject);
-     });
+          this.cores.forEach(function (item) {
+            if (itemCheker(item, 'Материнская плата')) mb.push(item);
+            if (itemCheker(item, 'Процессор')) cores.push(item);
+            if (itemCheker(item, 'Охлаждение')) cold.push(item);
+            if (itemCheker(item, 'Видеокарта')) gc.push(item);
+            if (itemCheker(item, 'Оперативная память')) ram.push(item);
+            if (itemCheker(item, 'Жесткий диск')) hdd.push(item);
+            if (itemCheker(item, 'Блок питания')) bp.push(item);
+            if (itemCheker(item, 'Корпус')) cases.push(item);
+          });
+          this.itemsObject.motherBoards = mb;
+          this.itemsObject.cores = cores;
+          this.itemsObject.cold = cold;
+          this.itemsObject.graphicCards = gc;
+          this.itemsObject.ram = ram;
+          this.itemsObject.hdd = hdd;
+          this.itemsObject.bp = bp;
+          this.itemsObject.cases = cases;
+          console.info(this.itemsObject);
+        });
+    }
  }
 
   public getProductById(id): Observable<any> {

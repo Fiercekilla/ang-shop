@@ -8,8 +8,8 @@ import { DesktopComponent } from "./desktop/desktop.component";
 
 
 const appRoutes: Routes = [
-  { path: '', component: MainComponent, canActivate: [AuthGuard] },
-  { path: 'desktop', component: DesktopComponent, canActivate: [AuthGuard] },
+  { path: '', component: DesktopComponent, canActivate: [AuthGuard] },
+  { path: 'config', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'product/:id', component: ProductComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
 

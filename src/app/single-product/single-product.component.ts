@@ -11,6 +11,7 @@ export class SingleProductComponent implements OnInit {
 
   @Input('item') item: any;
   @Input('category') category: any;
+  @Input('mini') mini:boolean;
 
   constructor(private router: Router,
               public rest: RestService) { }
