@@ -108,7 +108,9 @@ export class RestService {
   addItemToCart(item:any, count: any){
 
       let product = Object.assign({},item);
-      count.value ? product.count = +count.value : product.count = 1;
+      console.log(count.value);
+      !!+count.value ? product.count = +count.value : product.count = 1;
+      console.log(product.count);
       if (!Array.isArray(this.cart[product.category])) this.cart[product.category] = [];
       product.price = +product.price * +count.value;
       this.cart[product.category].push(product);

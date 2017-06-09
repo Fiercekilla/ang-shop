@@ -12,7 +12,7 @@
     </div>
   </div>
   <div *ngIf="mini" class="add-to-cart col-md-5">
-    <input type="text" placeholder="Количество" #count>
+    <input type="text" placeholder="Количество" [value]="1" #count>
     <button class="btn btn-success" (click)="rest.addItemToCart(item, count)">Добавить в Корзину</button>
   </div>
     <button *ngIf="!mini" class="btn btn-success" (click)="rest.addItemToConfig(item)">Добавить в конфигурацию</button>

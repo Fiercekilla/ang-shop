@@ -1,11 +1,19 @@
-<div class="mini-cart">
-  <ul>
+<div class="mini-cart" id="printContent">
+  <div class="print-info">
+    <div class="title">Договор розничной купли-продачи №100165 от {{ docDate | date:'dd.MM.yyyy' }}</div>
+    <div class="text">
+      Продавец: ООО "ДарТрек".<br>
+      Адрес: г.Москва, ул. Красная Пресня, 44, с.2.
+    </div>
+  </div>
+  <ul class="cart-products">
     <li *ngFor="let category of rest.cartKeys">
       <div class="cart-product-heading">{{category}}</div>
       <ul>
-        <li class="cart-product-item" *ngFor="let item of rest.cart[category]"><span>{{ item.productName }}</span> <span>{{ item.count }}</span> <span>{{ item.price }}</span></li>
+        <li class="cart-product-item" *ngFor="let item of rest.cart[category]"><span>{{ item.productName }}</span> <span>{{ item.count }}</span> <span>{{ item.price }}руб.</span></li>
       </ul>
     </li>
   </ul>
-  <div class="total"><span>ИТОГО:</span><span>{{ rest.totalSum }}</span></div>
+  <div class="total"><span>ИТОГО:</span><span>{{ rest.totalSum }}руб.</span></div>
+  <button class="btn btn-success" (click)="printCart()">Печать</button>
 </div>
