@@ -31,7 +31,7 @@ export class RestService {
 
  public getCores() : Observable<any> {
     if (this.cores.length > 0) {
-      return Observable.of(this.cores)
+      return Observable.of(this.cores);
     } else {
       return this.http.get('http://' + this.ip + '/api/cores')
         .map((res) => {

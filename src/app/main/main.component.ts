@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
       tooltip: 'tooltip'},
     {name: 'Оперативная память', id: 'ram',
       tooltip: 'tooltip'},
-    {name: 'Жеткий диск', id: 'hdd',
+    {name: 'Жеcткий диск', id: 'hdd',
       tooltip: 'tooltip'},
     {name: 'Блок питания', id: 'bp',
       tooltip: 'tooltip'},
