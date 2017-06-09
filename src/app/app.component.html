@@ -9,16 +9,10 @@
       <ul class="nav navbar-nav">
         <li><a routerLinkActive="active" routerLink="/config">Конфигуратор</a></li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" [class.active]="addPanel" (click)="showCart = !showCart">Корзина</a></li>
-        <li><a href="#" (click)="toggleAddPanel()" [class.active]="addPanel">Добавить</a></li>
-        <li><a href="#" (click)="this.authService.logout()" [class.active]="addPanel">Выйти</a></li>
+        <li><a [class.active]="addPanel" (click)="showCart = !showCart">Корзина</a></li>
+        <li><a  *ngIf="rest.userRole ==='admin'" (click)="toggleAddPanel()" [class.active]="addPanel">Добавить</a></li>
+        <li><a (click)="this.authService.logout()" [class.active]="addPanel">Выйти</a></li>
       </ul>
     </div>
   </div>

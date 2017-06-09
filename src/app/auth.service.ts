@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { reject } from "q";
 import { retry } from "rxjs/operator/retry";
+import { RestService } from "./rest/rest.service";
 
 @Injectable()
 export class AuthService {
@@ -22,12 +23,14 @@ export class AuthService {
     }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private rest: RestService) { }
 
   login(login:string, password:string) {
-    const authCheker = (login,password, inputLogin, inputPassword) => {
-      if (login === inputLogin && password === inputPassword) {
+    const authCheker = (userItem, inputLogin, inputPassword) => {
+      if (userItem.login === inputLogin && userItem.password === inputPassword) {
         this.isLogged = true;
+        this.rest.userRole = userItem.userType;
         this.router.navigate(['/']);
         this.loginErrorMessage = null;
       } else {
@@ -35,7 +38,7 @@ export class AuthService {
       }
     };
     this.users.forEach(function (item) {
-      authCheker(item.login, item.password, login, password);
+      authCheker(item, login, password);
     });
   }
 

@@ -14,6 +14,7 @@ export class RestService {
   public cart:any = {};
   public totalSum: number = 0;
   public cartKeys: any;
+  public userRole: string;
 
   private ip = 'localhost:9595';
 

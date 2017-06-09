@@ -16,5 +16,5 @@
     <button class="btn btn-success" (click)="rest.addItemToCart(item, count)">Добавить в Корзину</button>
   </div>
     <button *ngIf="!mini" class="btn btn-success" (click)="rest.addItemToConfig(item)">Добавить в конфигурацию</button>
-    <button *ngIf="!mini" class="btn btn-danger" >Удалить</button>
+    <button *ngIf="!mini && rest.userRole ==='admin'" class="btn btn-danger" >Удалить</button>
 </div>
