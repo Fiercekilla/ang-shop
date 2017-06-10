@@ -1,14 +1,18 @@
-<div class="col-md-8 jumbotron cat-tooltip">{{ activeTooltip }}</div>
-<md-tab-group class="col-md-8" [selectedIndex]="rest.config.length" (selectChange)="changeCategory($event)">
-  <md-tab *ngFor="let category of categories; let i = index" [disabled]="true">
-    <ng-template md-tab-label>
-      {{ i + 1 }}. {{ category.name }}
-    </ng-template>
-    <ul class="col-md-12 pagination">
-      <li><a *ngIf="pager.currentPage !== 1" (click)="setPage(category.id, 1)">&laquo;</a></li>
-      <li [class.active]="pager.currentPage === page" *ngFor="let page of pager.pages" (click)="setPage(category.id,page)"><a>{{ page }}</a></li>
-      <li><a *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(category.id, pager.totalPages)">&raquo;</a></li>
-    </ul>
-    <app-single-product *ngFor="let item of pagedItems[category.id]"  [item]="item"></app-single-product>
-  </md-tab>
-</md-tab-group>
+<div *ngIf="rest.config.length !== 8" class="config">
+  <div class="col-md-8 jumbotron cat-tooltip">{{ activeTooltip }}</div>
+  <md-tab-group class="col-md-8" [selectedIndex]="rest.config.length" (selectChange)="changeCategory($event)">
+    <md-tab *ngFor="let category of categories; let i = index" [disabled]="true">
+      <ng-template md-tab-label>
+        {{ i + 1 }}. {{ category.name }}
+      </ng-template>
+      <ul class="col-md-12 pagination">
+        <li><a *ngIf="pager.currentPage !== 1" (click)="setPage(category.id, 1)">&laquo;</a></li>
+        <li [class.active]="pager.currentPage === page" *ngFor="let page of pager.pages" (click)="setPage(category.id,page)"><a>{{ page }}</a></li>
+        <li><a *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(category.id, pager.totalPages)">&raquo;</a></li>
+      </ul>
+      <app-single-product *ngFor="let item of pagedItems[category.id]"  [item]="item"></app-single-product>
+    </md-tab>
+  </md-tab-group>
+</div>
+
+

@@ -16,7 +16,7 @@ export class RestService {
   public cartKeys: any;
   public userRole: string;
 
-  private ip = 'localhost:9595';
+  private ip = 'localhost:3000';
 
   constructor(private http: Http) { }
 
@@ -102,7 +102,23 @@ export class RestService {
       });
       this.itemsObject.cases = filteredItems;
     }
-
+    if (itemCheker(item, 'Жесткий диск')) {
+      filteredItems = [];
+      let self = this;
+      this.itemsObject.bp.forEach(function (el) {
+        if ((parseInt(self.config[0]['power']) + parseInt(self.config[2]['power']) + 100) < parseInt(el.power)) filteredItems.push(el);
+      });
+      console.log((parseInt(self.config[0]['power']) + parseInt(self.config[2]['power']) + 100));
+      this.itemsObject.bp = filteredItems;
+    }
+    if (itemCheker(item, 'Видеокарта')) {
+      filteredItems = [];
+      let self = this;
+      this.itemsObject.cold.forEach(function (el) {
+        if ((parseInt(self.config[0]['power']) > 90 && parseInt(el.size) >= 120) || (parseInt(self.config[0]['power']) < 90 && parseInt(el.size) < 90)) filteredItems.push(el);
+      });
+      this.itemsObject.cold = filteredItems;
+    }
     event.preventDefault();
   }
 

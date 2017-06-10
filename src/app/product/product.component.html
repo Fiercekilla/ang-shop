@@ -8,6 +8,14 @@
   <app-single-product *ngFor="let item of pagedItems"  [item]="item" [mini]="category"></app-single-product>
 </div>
 <div class="col-md-8 product" *ngIf="rest.item[0] && !categoryView">
-
-  {{ rest.item[0].productName |  json  }}
+  <img src="{{rest.item[0].imageUrl}}" alt="">
+  <ul>
+    <li>{{ rest.item[0].category }}: {{ rest.item[0].productName }}</li>
+    <li> Производитель: {{ rest.item[0].companyName }}</li>
+    <li *ngIf="rest.item[0].category === 'Процессор' || rest.item[0].category === 'Материнская плата'"> Сокет: {{ rest.item[0].socket }}</li>
+    <li *ngIf="rest.item[0].category === 'Корпус' || rest.item[0].category === 'Материнская плата' || rest.item[0].category === 'Охлаждение'"> Размер: {{ rest.item[0]?.size }}</li>
+    <li *ngIf="rest.item[0].category === 'Процессор' || rest.item[0].category === 'Блок питания' || rest.item[0].category === 'Видеокарта'"> Мощнось: {{ rest.item[0]?.power }}</li>
+  </ul>
+  <button class="btn btn-success" (click)="rest.addItemToCart(rest.item[0])">Добавить в корзину</button>
+  <button class="btn btn-primary" (click)="goBack()"> « Назад</button>
 </div>

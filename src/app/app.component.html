@@ -93,7 +93,7 @@
   </form>
 
   <router-outlet></router-outlet>
-  <div class="col-md-4 config" *ngIf="authService.isLogged">
+  <div class="config" *ngIf="authService.isLogged && rest.config.length > 0" [class.col-md-12]="rest.config.length === 8" [class.col-md-4]="rest.config.length !== 8">
     <h3>Ваша конфигурация: </h3>
     <div class="jumbotron" *ngFor="let item of rest.config; let i = index;">
       {{item.category}} : {{ item.productName }}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {RestService} from "../rest/rest.service";
 import { PagerService } from "../pager.service";
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-product',
@@ -25,7 +26,8 @@ export class ProductComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               public rest: RestService,
-              private pagerService: PagerService) { }
+              private pagerService: PagerService,
+              private  location: Location) { }
 
   ngOnInit() {
     this.suitProducts = {};
@@ -90,6 +92,10 @@ export class ProductComponent implements OnInit {
       });
     }
 
+  }
+
+  public goBack() {
+    this.location.back();
   }
 
   public setPage(page: number) {
