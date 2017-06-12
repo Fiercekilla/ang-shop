@@ -3,6 +3,8 @@ import {Http, RequestOptions, Headers} from "@angular/http";
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import * as _ from 'underscore';
+
 @Injectable()
 export class RestService {
 
@@ -115,7 +117,7 @@ export class RestService {
       filteredItems = [];
       let self = this;
       this.itemsObject.cold.forEach(function (el) {
-        if ((parseInt(self.config[0]['power']) > 90 && parseInt(el.size) >= 120) || (parseInt(self.config[0]['power']) < 90 && parseInt(el.size) < 90)) filteredItems.push(el);
+        if ((parseInt(self.config[0]['power']) > 90 && parseInt(el.size) >= 120 && el.socket.indexOf(self.config[0]['socket'].split(' ')[self.config[0]['socket'].split(' ').length - 1]) !== -1) || (parseInt(self.config[0]['power']) < 90 && parseInt(el.size) < 93 && el.socket.indexOf(self.config[0]['socket'].split(' ')[self.config[0]['socket'].split(' ').length - 1]) !== -1)) filteredItems.push(el);
       });
       this.itemsObject.cold = filteredItems;
     }
