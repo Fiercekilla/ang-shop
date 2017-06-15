@@ -146,4 +146,26 @@ export class RestService {
       this.cartKeys = Object.keys(this.cart);
       this.totalSum += product.price;
   }
+
+  removeItemFromCart(item:any) {
+    let self = this;
+    this.cart[item.category].forEach(function (elem, i) {
+      if(item.productName === elem.productName) {
+        self.cart[item.category].splice(i,1);
+      }
+    })
+  }
+
+  decriseCount(item:any){
+    let cost = item.price / item.count;
+    item.count--;
+    item.price = item.count*cost;
+  }
+
+  incriseCount(item:any){
+    let cost = item.price / item.count;
+    item.count++;
+    item.price = item.count*cost;
+  }
+
 }

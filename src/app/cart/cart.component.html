@@ -10,7 +10,15 @@
     <li *ngFor="let category of rest.cartKeys">
       <div class="cart-product-heading">{{category}}</div>
       <ul>
-        <li class="cart-product-item" *ngFor="let item of rest.cart[category]"><span>{{ item.productName }}</span> <span>{{ item.count }}</span> <span>{{ item.price }}руб.</span></li>
+        <li class="cart-product-item" *ngFor="let item of rest.cart[category]">
+          <span>{{ item.productName }}</span>
+          <span>
+            <span class="glyphicon glyphicon-plus" (click)="rest.incriseCount(item)"></span>
+            {{ item.count }}
+            <span *ngIf="item.count > 1" class="glyphicon glyphicon-minus" (click)="rest.decriseCount(item)"></span>
+          </span>
+          <span>{{ item.price }}руб.</span>
+          <span><button class="btn btn-danger" (click)="rest.removeItemFromCart(item)">Удалить</button></span></li>
       </ul>
     </li>
   </ul>
