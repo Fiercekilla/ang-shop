@@ -35,12 +35,12 @@ export class RestService {
     if (this.cores.length > 0) {
       return Observable.of(this.cores);
     } else {
-      return this.http.get('http://' + this.ip + '/api/cores')
+      return this.http.get('http://' + this.ip + '/api/cores')      //Запрос на получение массива всех товаров
         .map((res) => {
           let body = res['_body'];
           this.cores = JSON.parse(body);
-          const itemCheker = (item,category) => item.category === category;
-          let mb = [],
+          const itemCheker = (item,category) => item.category === category;   //Функия проверки элменета соответсвию категории, указаной в качестве аргумента этой ф-ции
+          let mb = [],  //Временные массивы
             cores =[],
             gc = [],
             cold = [],
@@ -48,7 +48,7 @@ export class RestService {
             hdd = [],
             bp = [],
             cases = [];
-          this.cores.forEach(function (item) {
+          this.cores.forEach(function (item) {      //Проходим по всем товарам и с помощью ф-ции проверки размещаем каждый товар в соответвствущем временном массиве
             if (itemCheker(item, 'Материнская плата')) mb.push(item);
             if (itemCheker(item, 'Процессор')) cores.push(item);
             if (itemCheker(item, 'Охлаждение')) cold.push(item);
@@ -58,6 +58,7 @@ export class RestService {
             if (itemCheker(item, 'Блок питания')) bp.push(item);
             if (itemCheker(item, 'Корпус')) cases.push(item);
           });
+          //Присвяем временные масивы к полям общего объекта
           this.itemsObject.motherBoards = mb;
           this.itemsObject.cores = cores;
           this.itemsObject.cold = cold;
@@ -90,36 +91,40 @@ export class RestService {
     const itemCheker = (el,category) => el.category === category;
     let filteredItems: any = [];
 
-    if (itemCheker(item, 'Процессор')) {
-      this.itemsObject.motherBoards.forEach(function (el) {
-        if (el['socket'].toLowerCase() === item.socket.toLowerCase()) filteredItems.push(el);
+    if (itemCheker(item, 'Процессор')) {        //Если выбранные товар Процессор
+      this.itemsObject.motherBoards.forEach(function (el) {     //Проходим по всем товарам категории Материская плата
+        if (el['socket'].toLowerCase() === item.socket.toLowerCase()) filteredItems.push(el);     //Выбираем только те элменты сокет которых совпадает с сокетом выбранного процессора
       });
-      this.itemsObject.motherBoards = filteredItems;
+      this.itemsObject.motherBoards = filteredItems;      //Добавляем полученные элменты в общий объект
     }
-    if (itemCheker(item, 'Блок питания')) {
+    if (itemCheker(item, 'Блок питания')) {       //Если выбранный товар Блок питания
       filteredItems = [];
       let self = this;
-      this.itemsObject.cases.forEach(function (el) {
-          if (self.config[1]['size'] === el.size) filteredItems.push(el);
+      this.itemsObject.cases.forEach(function (el) {      //Проходим по всем товарам категории Корпус
+          if (self.config[1]['size'] === el.size) filteredItems.push(el);     //Выбираем только те товары размер которых совпадает с размером выбранной в конфигруации материнской платой
       });
-      this.itemsObject.cases = filteredItems;
+      this.itemsObject.cases = filteredItems;     //Добавляем полученные элменты в общий объект
     }
-    if (itemCheker(item, 'Жесткий диск')) {
+    if (itemCheker(item, 'Жесткий диск')) {     //Если выбранный товар Жесткий диск
       filteredItems = [];
       let self = this;
-      this.itemsObject.bp.forEach(function (el) {
-        if ((parseInt(self.config[0]['power']) + parseInt(self.config[2]['power']) + 100) < parseInt(el.power)) filteredItems.push(el);
+      this.itemsObject.bp.forEach(function (el) {     //Проходим по всем товарам категории Блок питания
+        if ((parseInt(self.config[0]['power']) + parseInt(self.config[2]['power']) + 100) < parseInt(el.power)) filteredItems.push(el); //Выбираем только те товары мощнсть которых больше чем мощность процессора + мощность видеокарты + 100Вт запаса
       });
-      console.log((parseInt(self.config[0]['power']) + parseInt(self.config[2]['power']) + 100));
-      this.itemsObject.bp = filteredItems;
+      this.itemsObject.bp = filteredItems;      //Добавляем полученные элменты в общий объект
     }
-    if (itemCheker(item, 'Видеокарта')) {
+    if (itemCheker(item, 'Видеокарта')) {     //Если выбранный товар Видеокарта
       filteredItems = [];
       let self = this;
-      this.itemsObject.cold.forEach(function (el) {
+      this.itemsObject.cold.forEach(function (el) {       //Проходи по всем товарам категории Охлаждение
         if ((parseInt(self.config[0]['power']) > 90 && parseInt(el.size) >= 120 && el.socket.indexOf(self.config[0]['socket'].split(' ')[self.config[0]['socket'].split(' ').length - 1]) !== -1) || (parseInt(self.config[0]['power']) < 90 && parseInt(el.size) < 93 && el.socket.indexOf(self.config[0]['socket'].split(' ')[self.config[0]['socket'].split(' ').length - 1]) !== -1)) filteredItems.push(el);
+        /*Добавляем только те элементы, которые удовлетворяют следущим условиям:
+        1.Если мощность выбранного процессора больше 90Вт и размер куллера больше или равен 120х120 и сокет куллера совпадает с сокетом выбранного процессора
+        ИЛИ
+        2. Если мощность выбранного процессора меньше 90Вт и размер куллера меньше 93х93 и сокет куллера совпадает с сокетом выбранного проессора
+         */
       });
-      this.itemsObject.cold = filteredItems;
+      this.itemsObject.cold = filteredItems;      //Добавляем полученные элменты в общий объект
     }
     event.preventDefault();
   }
