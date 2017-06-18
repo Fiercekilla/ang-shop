@@ -126,6 +126,13 @@ export class RestService {
       });
       this.itemsObject.cold = filteredItems;      //Добавляем полученные элменты в общий объект
     }
+    if (this.config.length === 8) {
+      let countObj = {value:1};
+      let self = this;
+      this.config.forEach(function (item) {
+        self.addItemToCart(item,countObj);
+      });
+    }
     event.preventDefault();
   }
 
