@@ -10,7 +10,7 @@
         <li [class.active]="pager.currentPage === page" *ngFor="let page of pager.pages" (click)="setPage(category.id,page)"><a>{{ page }}</a></li>
         <li><a *ngIf="pager.currentPage !== pager.totalPages" (click)="setPage(category.id, pager.totalPages)">&raquo;</a></li>
       </ul>
-      <app-single-product *ngFor="let item of pagedItems[category.id]"  [item]="item"></app-single-product>
+      <app-single-product *ngFor="let icv zcxv xcbxfbn xbvdvgatem of pagedItems[category.id]"  [item]="item"></app-single-product>
     </md-tab>
   </md-tab-group>
 </div>
